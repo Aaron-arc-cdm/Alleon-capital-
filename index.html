@@ -1,0 +1,1274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alleon Capital — Invest Together. Build Together. Prosper Together.</title>
+    <style>
+        :root {
+            --bg: #0a0e14;
+            --surface: #131820;
+            --surface2: #1a1f2b;
+            --surface3: #1f2533;
+            --gold: #d4a843;
+            --gold-light: #e8c468;
+            --green: #2ecc71;
+            --green-dark: #1a7a43;
+            --red: #e74c3c;
+            --red-soft: #ff6b6b;
+            --yellow: #f0c040;
+            --text: #e1e4eb;
+            --text2: #a8b2c1;
+            --text3: #6b7385;
+            --border: #252b38;
+            --accent: #3b82f6;
+            --accent2: #6366f1;
+            --radius: 12px;
+            --radius-sm: 8px;
+            --shadow: 0 4px 24px rgba(0, 0, 0, .4);
+            --font: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            --transition: 0.2s ease;
+            --sidebar-w: 260px;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        html {
+            font-size: 15px;
+            scroll-behavior: smooth;
+        }
+        body {
+            font-family: var(--font);
+            background: var(--bg);
+            color: var(--text);
+            display: flex;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        /* SIDEBAR */
+        .sidebar {
+            width: var(--sidebar-w);
+            background: var(--surface);
+            border-right: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+            position: fixed;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            z-index: 100;
+            transition: transform var(--transition);
+            overflow-y: auto;
+            padding: 0 0 20px 0;
+        }
+        .sidebar-logo {
+            padding: 20px 20px 16px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 700;
+            font-size: 1.25rem;
+            letter-spacing: -0.3px;
+            color: #fff;
+            position: sticky;
+            top: 0;
+            background: var(--surface);
+            z-index: 2;
+        }
+        .sidebar-logo .icon {
+            width: 38px;
+            height: 38px;
+            border-radius: 10px;
+            background: linear-gradient(135deg, var(--gold), #b8861f);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: #0a0e14;
+            flex-shrink: 0;
+        }
+        .sidebar-nav {
+            flex: 1;
+            padding: 10px 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+        .sidebar-nav .section-label {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            color: var(--text3);
+            padding: 14px 10px 6px;
+            font-weight: 600;
+        }
+        .sidebar-nav a {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 12px;
+            border-radius: var(--radius-sm);
+            color: var(--text2);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all var(--transition);
+            cursor: pointer;
+            border: none;
+            background: none;
+            width: 100%;
+            text-align: left;
+            font-family: inherit;
+        }
+        .sidebar-nav a:hover,
+        .sidebar-nav a.active {
+            background: var(--surface3);
+            color: #fff;
+        }
+        .sidebar-nav a.active {
+            background: var(--surface3);
+            color: var(--gold-light);
+            font-weight: 600;
+            box-shadow: inset 3px 0 0 var(--gold);
+        }
+        .sidebar-nav a .badge {
+            margin-left: auto;
+            background: var(--red);
+            color: #fff;
+            font-size: 0.7rem;
+            padding: 3px 7px;
+            border-radius: 20px;
+            font-weight: 600;
+        }
+        .sidebar-footer {
+            padding: 12px 16px;
+            border-top: 1px solid var(--border);
+            font-size: 0.75rem;
+            color: var(--text3);
+            text-align: center;
+        }
+        /* MAIN */
+        .main {
+            margin-left: var(--sidebar-w);
+            flex: 1;
+            padding: 0;
+            min-height: 100vh;
+            width: calc(100% - var(--sidebar-w));
+        }
+        .topbar {
+            background: var(--surface);
+            border-bottom: 1px solid var(--border);
+            padding: 14px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+        .topbar .page-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #fff;
+            letter-spacing: -0.2px;
+        }
+        .topbar .user-chip {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--surface2);
+            padding: 8px 14px;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            cursor: pointer;
+            border: 1px solid var(--border);
+            transition: var(--transition);
+        }
+        .topbar .user-chip:hover {
+            border-color: var(--gold);
+        }
+        .topbar .avatar {
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            background: var(--accent2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: #fff;
+            font-size: 0.85rem;
+        }
+        .content {
+            padding: 24px;
+            display: grid;
+            gap: 20px;
+        }
+        /* CARDS */
+        .card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 20px 22px;
+            box-shadow: var(--shadow);
+        }
+        .card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 16px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .card-header h3 {
+            font-size: 1rem;
+            font-weight: 700;
+            color: #fff;
+            letter-spacing: -0.2px;
+        }
+        .card-header .chip {
+            font-size: 0.75rem;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-weight: 600;
+        }
+        .chip-green {
+            background: #1a3a2a;
+            color: var(--green);
+        }
+        .chip-yellow {
+            background: #3a3010;
+            color: var(--yellow);
+        }
+        .chip-red {
+            background: #3a1a1a;
+            color: var(--red-soft);
+        }
+        .chip-blue {
+            background: #1a2a3a;
+            color: var(--accent);
+        }
+        .chip-gold {
+            background: #3a2a10;
+            color: var(--gold-light);
+        }
+        /* STATS GRID */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+        }
+        .stat-card {
+            background: var(--surface2);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 18px 16px;
+            text-align: center;
+        }
+        .stat-card .value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #fff;
+            letter-spacing: -0.5px;
+        }
+        .stat-card .label {
+            font-size: 0.78rem;
+            color: var(--text2);
+            margin-top: 4px;
+        }
+        .stat-card.gold .value {
+            color: var(--gold-light);
+        }
+        .stat-card.green .value {
+            color: var(--green);
+        }
+        /* TABLE */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.85rem;
+        }
+        table th {
+            text-align: left;
+            padding: 10px 8px;
+            color: var(--text3);
+            font-weight: 600;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-bottom: 1px solid var(--border);
+        }
+        table td {
+            padding: 11px 8px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+            color: var(--text);
+        }
+        table tr:hover td {
+            background: rgba(255, 255, 255, 0.015);
+        }
+        /* BUTTONS */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 10px 18px;
+            border-radius: 25px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            cursor: pointer;
+            border: none;
+            transition: all var(--transition);
+            font-family: inherit;
+            text-decoration: none;
+            white-space: nowrap;
+        }
+        .btn-primary {
+            background: var(--gold);
+            color: #0a0e14;
+        }
+        .btn-primary:hover {
+            background: var(--gold-light);
+            transform: translateY(-1px);
+        }
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--border);
+            color: var(--text);
+        }
+        .btn-outline:hover {
+            border-color: var(--gold);
+            color: #fff;
+        }
+        .btn-sm {
+            padding: 6px 12px;
+            font-size: 0.75rem;
+            border-radius: 20px;
+        }
+        .btn-danger {
+            background: var(--red);
+            color: #fff;
+        }
+        .btn-accent {
+            background: var(--accent);
+            color: #fff;
+        }
+        /* PROGRESS */
+        .progress-bar {
+            height: 8px;
+            border-radius: 10px;
+            background: var(--surface3);
+            overflow: hidden;
+            margin-top: 6px;
+        }
+        .progress-bar .fill {
+            height: 100%;
+            border-radius: 10px;
+            transition: width 0.5s ease;
+        }
+        .fill-green {
+            background: var(--green);
+        }
+        .fill-gold {
+            background: var(--gold);
+        }
+        .fill-red {
+            background: var(--red);
+        }
+        /* BADGES */
+        .status-dot {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            margin-right: 5px;
+        }
+        .status-dot.green {
+            background: var(--green);
+        }
+        .status-dot.yellow {
+            background: var(--yellow);
+        }
+        .status-dot.red {
+            background: var(--red);
+        }
+        /* MODAL */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 200;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 0.2s ease;
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        .modal {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 24px;
+            max-width: 550px;
+            width: 90%;
+            max-height: 85vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+        }
+        .modal h3 {
+            color: #fff;
+            margin-bottom: 16px;
+            font-size: 1.1rem;
+        }
+        .modal label {
+            display: block;
+            font-size: 0.8rem;
+            color: var(--text2);
+            margin: 10px 0 4px;
+            font-weight: 600;
+        }
+        .modal input,
+        .modal select,
+        .modal textarea {
+            width: 100%;
+            padding: 10px 12px;
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--border);
+            background: var(--surface2);
+            color: #fff;
+            font-family: inherit;
+            font-size: 0.9rem;
+            resize: vertical;
+        }
+        .modal input:focus,
+        .modal select:focus,
+        .modal textarea:focus {
+            outline: none;
+            border-color: var(--gold);
+        }
+        .modal .btn-row {
+            display: flex;
+            gap: 10px;
+            margin-top: 16px;
+            justify-content: flex-end;
+        }
+        /* TOGGLE */
+        .toggle-group {
+            display: flex;
+            gap: 4px;
+            background: var(--surface3);
+            border-radius: 25px;
+            padding: 3px;
+        }
+        .toggle-group button {
+            padding: 8px 16px;
+            border-radius: 22px;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.8rem;
+            background: transparent;
+            color: var(--text2);
+            transition: var(--transition);
+            font-family: inherit;
+        }
+        .toggle-group button.active {
+            background: var(--gold);
+            color: #0a0e14;
+        }
+        /* MOBILE */
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 1.6rem;
+            cursor: pointer;
+            padding: 4px 8px;
+            border-radius: 6px;
+        }
+        @media (max-width: 768px) {
+            .sidebar {
+                transform: translateX(-100%);
+            }
+            .sidebar.open {
+                transform: translateX(0);
+            }
+            .main {
+                margin-left: 0;
+                width: 100%;
+            }
+            .menu-toggle {
+                display: block;
+            }
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .content {
+                padding: 12px;
+                gap: 12px;
+            }
+            .topbar {
+                padding: 10px 14px;
+            }
+            .topbar .page-title {
+                font-size: 1rem;
+            }
+            table {
+                font-size: 0.7rem;
+            }
+            table th,
+            table td {
+                padding: 6px 4px;
+            }
+        }
+        canvas {
+            max-width: 100%;
+        }
+        .hidden {
+            display: none !important;
+        }
+        .tag {
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            background: var(--surface3);
+            color: var(--text2);
+            margin: 2px;
+        }
+        .vote-bar {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 6px 0;
+        }
+        .vote-bar .bar-bg {
+            flex: 1;
+            height: 20px;
+            border-radius: 10px;
+            background: var(--surface3);
+            overflow: hidden;
+        }
+        .vote-bar .bar-fill {
+            height: 100%;
+            border-radius: 10px;
+            background: var(--green);
+            transition: width 0.4s;
+        }
+        .vote-bar span {
+            font-weight: 700;
+            font-size: 0.8rem;
+            min-width: 40px;
+            text-align: right;
+        }
+    </style>
+</head>
+<body>
+    <!-- SIDEBAR -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-logo">
+            <div class="icon">▲</div>
+            <span>Alleon Capital</span>
+        </div>
+        <nav class="sidebar-nav">
+            <span class="section-label">Overview</span>
+            <a data-page="dashboard" class="active" onclick="navigate('dashboard')">📊 Dashboard</a>
+            <a data-page="wallet" onclick="navigate('wallet')">💳 Digital Wallet</a>
+            <span class="section-label">Investing</span>
+            <a data-page="marketplace" onclick="navigate('marketplace')">🏪 Funding Marketplace</a>
+            <a data-page="voting" onclick="navigate('voting')">🗳️ Community Voting <span class="badge" id="voteBadge">2</span></a>
+            <a data-page="portfolio" onclick="navigate('portfolio')">📈 Portfolio</a>
+            <a data-page="secondary" onclick="navigate('secondary')">🔄 Secondary Market</a>
+            <span class="section-label">Management</span>
+            <a data-page="duediligence" onclick="navigate('duediligence')">🔍 Due Diligence</a>
+            <a data-page="repayment" onclick="navigate('repayment')">📋 Repayment Tracking</a>
+            <a data-page="recovery" onclick="navigate('recovery')">⚖️ Recovery</a>
+            <span class="section-label">Business</span>
+            <a data-page="business-dash" onclick="navigate('business-dash')">🏢 Business Dashboard</a>
+            <a data-page="apply" onclick="navigate('apply')">📝 Apply for Funding</a>
+        </nav>
+        <div class="sidebar-footer">© 2026 Alleon Capital<br>Licensed & Regulated</div>
+    </aside>
+
+    <!-- MAIN -->
+    <div class="main" id="mainContent">
+        <header class="topbar">
+            <div style="display:flex;align-items:center;gap:12px;">
+                <button class="menu-toggle" onclick="toggleSidebar()" aria-label="Menu">☰</button>
+                <span class="page-title" id="pageTitle">Dashboard</span>
+            </div>
+            <div class="user-chip" title="Investor Account">
+                <div class="avatar">JK</div>
+                <span>Jane Kamau</span>
+                <span style="color:var(--gold-light);">● Investor</span>
+            </div>
+        </header>
+        <div class="content" id="contentArea">
+            <!-- Dynamic content injected here -->
+        </div>
+    </div>
+
+    <!-- MODAL CONTAINER -->
+    <div id="modalContainer"></div>
+
+    <script>
+        // ==================== ALLEON CAPITAL — COMPLETE APP ENGINE ====================
+        // Data Store (simulated backend)
+        const Store = {
+            investor: {
+                name: 'Jane Kamau',
+                id: 'INV-0042',
+                balance: 125000,
+                totalInvested: 87500,
+                totalEarnings: 23450,
+                ownershipPct: 4.72,
+                portfolioValue: 110950,
+                votesCast: 3,
+                pendingVotes: 2,
+            },
+            businesses: [
+                { id: 'B001', name: 'Mali Fresh Farms', industry: 'Agriculture', fundingGoal: 500000, raised: 320000,
+                    riskScore: 78, rating: 'B', expectedReturn: '18%', duration: '12 months', collateral: 'Land title (2
+                    acres)', status: 'active', repaymentStatus: 'green', description: 'Organic vegetable farm
+                    expanding greenhouse operations in Kiambu.' },
+                { id: 'B002', name: 'TechSavvy Solutions', industry: 'Technology', fundingGoal: 800000, raised: 600000,
+                    riskScore: 85, rating: 'A', expectedReturn: '22%', duration: '8 months', collateral: 'Equipment &
+                    IP', status: 'active', repaymentStatus: 'green', description: 'Software development firm
+                    building SME management tools.' },
+                { id: 'B003', name: 'Zawadi Textiles', industry: 'Manufacturing', fundingGoal: 350000, raised: 180000,
+                    riskScore: 62, rating: 'C', expectedReturn: '14%', duration: '18 months', collateral: 'Factory
+                    equipment', status: 'funding', repaymentStatus: 'yellow', description: 'Clothing manufacturer
+                    seeking to purchase automated looms.' },
+                { id: 'B004', name: 'Sunrise Solar Ltd', industry: 'Energy', fundingGoal: 1200000, raised: 900000,
+                    riskScore: 91, rating: 'A+', expectedReturn: '25%', duration: '6 months', collateral: 'Solar
+                    panel inventory', status: 'active', repaymentStatus: 'green', description: 'Solar energy company
+                    expanding to rural areas.' },
+                { id: 'B005', name: 'QuickBite Catering', industry: 'Food & Beverage', fundingGoal: 200000, raised: 45000,
+                    riskScore: 55, rating: 'D', expectedReturn: '10%', duration: '24 months', collateral: 'Kitchen
+                    equipment', status: 'funding', repaymentStatus: 'red', description: 'Catering business needing
+                    working capital.' },
+            ],
+            votes: [
+                { id: 'V001', businessId: 'B003', businessName: 'Zawadi Textiles', amount: 350000, yesVotes: 62,
+                    noVotes: 38, totalVoters: 45, threshold: 70, endsIn: '2 days' },
+                { id: 'V002', businessId: 'B005', businessName: 'QuickBite Catering', amount: 200000, yesVotes: 48,
+                    noVotes: 52, totalVoters: 38, threshold: 70, endsIn: '5 days' },
+            ],
+            secondaryListings: [
+                { id: 'S001', businessName: 'Mali Fresh Farms', units: 150, pricePerUnit: 1200, seller: 'John M.',
+                    discount: '5% below NAV' },
+                { id: 'S002', businessName: 'TechSavvy Solutions', units: 80, pricePerUnit: 2500, seller: 'Amina K.',
+                    discount: 'At NAV' },
+            ],
+            recoveryCases: [
+                { id: 'R001', businessName: 'QuickBite Catering', stage: 2, amountOwed: 35000, daysLate: 45,
+                    action: 'Negotiation in progress' },
+            ],
+            auditLog: [],
+        };
+
+        // Navigation
+        let currentPage = 'dashboard';
+
+        function navigate(page) {
+            currentPage = page;
+            document.querySelectorAll('.sidebar-nav a').forEach(a => a.classList.remove('active'));
+            const link = document.querySelector(`[data-page="${page}"]`);
+            if (link) link.classList.add('active');
+            document.getElementById('pageTitle').textContent = getPageTitle(page);
+            renderPage(page);
+            // Close sidebar on mobile
+            if (window.innerWidth <= 768) {
+                document.getElementById('sidebar').classList.remove('open');
+            }
+        }
+
+        function toggleSidebar() {
+            document.getElementById('sidebar').classList.toggle('open');
+        }
+
+        function getPageTitle(page) {
+            const titles = {
+                'dashboard': 'Investor Dashboard',
+                'wallet': 'Digital Wallet',
+                'marketplace': 'Business Funding Marketplace',
+                'voting': 'Community Voting',
+                'portfolio': 'Portfolio & Diversification',
+                'secondary': 'Secondary Share Market',
+                'duediligence': 'Due Diligence System',
+                'repayment': 'Repayment Tracking',
+                'recovery': 'Recovery Management',
+                'business-dash': 'Business Dashboard',
+                'apply': 'Apply for Funding',
+            };
+            return titles[page] || 'Alleon Capital';
+        }
+
+        function renderPage(page) {
+            const area = document.getElementById('contentArea');
+            switch (page) {
+                case 'dashboard':
+                    area.innerHTML = renderDashboard();
+                    break;
+                case 'wallet':
+                    area.innerHTML = renderWallet();
+                    break;
+                case 'marketplace':
+                    area.innerHTML = renderMarketplace();
+                    break;
+                case 'voting':
+                    area.innerHTML = renderVoting();
+                    break;
+                case 'portfolio':
+                    area.innerHTML = renderPortfolio();
+                    break;
+                case 'secondary':
+                    area.innerHTML = renderSecondary();
+                    break;
+                case 'duediligence':
+                    area.innerHTML = renderDueDiligence();
+                    break;
+                case 'repayment':
+                    area.innerHTML = renderRepayment();
+                    break;
+                case 'recovery':
+                    area.innerHTML = renderRecovery();
+                    break;
+                case 'business-dash':
+                    area.innerHTML = renderBusinessDash();
+                    break;
+                case 'apply':
+                    area.innerHTML = renderApply();
+                    break;
+                default:
+                    area.innerHTML = renderDashboard();
+            }
+            attachEventListeners(page);
+            updateVoteBadge();
+        }
+
+        function updateVoteBadge() {
+            const badge = document.getElementById('voteBadge');
+            if (badge) badge.textContent = Store.votes.length;
+                 }
+           // ==================== RENDER FUNCTIONS ====================
+        function renderDashboard() {
+            const inv = Store.investor;
+            return `
+            <div class="stats-grid">
+              <div class="stat-card gold"><div class="value">KSH ${inv.portfolioValue.toLocaleString()}</div><div class="label">Total Portfolio Value</div></div>
+              <div class="stat-card green"><div class="value">KSH ${inv.totalEarnings.toLocaleString()}</div><div class="label">Earnings Received</div></div>
+              <div class="stat-card"><div class="value">${inv.ownershipPct}%</div><div class="label">Fund Ownership</div></div>
+              <div class="stat-card"><div class="value">KSH ${inv.balance.toLocaleString()}</div><div class="label">Wallet Balance</div></div>
+            </div>
+            <div class="card">
+              <div class="card-header"><h3>📈 Portfolio Growth</h3><span class="chip chip-green">+18.4% YTD</span></div>
+              <canvas id="growthChart" height="200"></canvas>
+            </div>
+            <div class="card">
+              <div class="card-header"><h3>💰 Profit Distribution Breakdown</h3></div>
+              <div style="display:flex;gap:16px;flex-wrap:wrap;">
+                <div style="flex:1;min-width:120px;text-align:center;padding:12px;background:var(--surface2);border-radius:var(--radius-sm);">
+                  <div style="font-size:1.4rem;font-weight:700;color:var(--gold-light);">50%</div><div style="font-size:0.75rem;color:var(--text2);">Reinvestment Pool</div></div>
+                <div style="flex:1;min-width:120px;text-align:center;padding:12px;background:var(--surface2);border-radius:var(--radius-sm);">
+                  <div style="font-size:1.4rem;font-weight:700;color:var(--accent);">20%</div><div style="font-size:0.75rem;color:var(--text2);">Emergency Reserve</div></div>
+                <div style="flex:1;min-width:120px;text-align:center;padding:12px;background:var(--surface2);border-radius:var(--radius-sm);">
+                  <div style="font-size:1.4rem;font-weight:700;color:var(--green);">20%</div><div style="font-size:0.75rem;color:var(--text2);">Investor Distribution</div></div>
+                <div style="flex:1;min-width:120px;text-align:center;padding:12px;background:var(--surface2);border-radius:var(--radius-sm);">
+                  <div style="font-size:1.4rem;font-weight:700;color:var(--text2);">10%</div><div style="font-size:0.75rem;color:var(--text2);">Operations Fund</div></div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-header"><h3>🛡️ Reserve Fund Health</h3><span class="chip chip-green">Healthy</span></div>
+              <div class="progress-bar"><div class="fill fill-green" style="width:85%;"></div></div>
+              <p style="font-size:0.8rem;color:var(--text2);margin-top:8px;">KSH 425,000 / 500,000 target — 85% funded</p>
+            </div>`;
+        }
+
+        function renderWallet() {
+            const inv = Store.investor;
+            return `
+            <div class="stats-grid">
+              <div class="stat-card gold"><div class="value">KSH ${inv.balance.toLocaleString()}</div><div class="label">Available Balance</div></div>
+              <div class="stat-card"><div class="value">KSH ${inv.totalInvested.toLocaleString()}</div><div class="label">Total Invested</div></div>
+              <div class="stat-card green"><div class="value">KSH ${inv.totalEarnings.toLocaleString()}</div><div class="label">Total Earnings</div></div>
+            </div>
+            <div class="card">
+              <div class="card-header"><h3>💳 Quick Actions</h3></div>
+              <div style="display:flex;gap:10px;flex-wrap:wrap;">
+                <button class="btn btn-primary" onclick="showModal('deposit')">+ Deposit Funds</button>
+                <button class="btn btn-outline" onclick="showModal('withdraw')">Withdraw</button>
+                <button class="btn btn-outline" onclick="showModal('transfer')">Transfer</button>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-header"><h3>📋 Recent Transactions</h3></div>
+              <table>
+                <thead><tr><th>Date</th><th>Type</th><th>Amount</th><th>Channel</th><th>Status</th></tr></thead>
+                <tbody>
+                  <tr><td>2026-06-10</td><td>Deposit</td><td>+KSH 25,000</td><td>M-Pesa</td><td><span class="status-dot green"></span>Complete</td></tr>
+                  <tr><td>2026-06-05</td><td>Investment</td><td>-KSH 15,000</td><td>Wallet</td><td><span class="status-dot green"></span>Complete</td></tr>
+                  <tr><td>2026-05-28</td><td>Profit Distribution</td><td>+KSH 4,200</td><td>Auto</td><td><span class="status-dot green"></span>Complete</td></tr>
+                  <tr><td>2026-05-15</td><td>Withdrawal</td><td>-KSH 8,000</td><td>Bank Transfer</td><td><span class="status-dot green"></span>Complete</td></tr>
+                </tbody>
+              </table>
+            </div>`;
+        }
+
+        function renderMarketplace() {
+            let html = `<div class="card"><div class="card-header"><h3>🏪 Available Funding Opportunities</h3><span class="chip chip-gold">${Store.businesses.length} Businesses</span></div>`;
+            html +=
+                '<div style="display:grid;gap:14px;">';
+            Store.businesses.forEach(b => {
+                const pct = Math.round((b.raised / b.fundingGoal) * 100);
+                const statusColor = b.status === 'active' ? 'green' : 'yellow';
+                html += `
+              <div style="background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius);padding:16px;">
+                <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;">
+                  <strong style="font-size:1rem;color:#fff;">${b.name}</strong>
+                  <span class="chip chip-${statusColor}">${b.rating} · ${b.riskScore}/100</span>
+                </div>
+                <p style="font-size:0.8rem;color:var(--text2);margin:6px 0;">${b.industry} · ${b.description}</p>
+                <div style="display:flex;gap:20px;flex-wrap:wrap;font-size:0.8rem;color:var(--text2);margin:8px 0;">
+                  <span>💰 Goal: KSH ${b.fundingGoal.toLocaleString()}</span>
+                  <span>📈 Return: ${b.expectedReturn}</span>
+                  <span>⏱️ ${b.duration}</span>
+                  <span>🔒 ${b.collateral}</span>
+                </div>
+                <div class="progress-bar" style="margin:8px 0;"><div class="fill fill-gold" style="width:${pct}%;"></div></div>
+                <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;">
+                  <span style="font-size:0.75rem;color:var(--text3);">KSH ${b.raised.toLocaleString()} raised of KSH ${b.fundingGoal.toLocaleString()} (${pct}%)</span>
+                  <button class="btn btn-primary btn-sm" onclick="investIn('${b.id}')">Invest Now</button>
+                </div>
+              </div>`;
+            });
+            html += '</div></div>';
+            return html;
+        }
+
+        function renderVoting() {
+            let html = `<div class="card"><div class="card-header"><h3>🗳️ Active Votes</h3><span class="chip chip-yellow">${Store.votes.length} Pending</span></div>`;
+            Store.votes.forEach(v => {
+                const yesPct = Math.round((v.yesVotes / (v.yesVotes + v.noVotes)) * 100);
+                const noPct = 100 - yesPct;
+                const met = yesPct >= v.threshold;
+                html += `
+              <div style="background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius);padding:14px;margin-bottom:12px;">
+                <strong style="color:#fff;">${v.businessName}</strong> · KSH ${v.amount.toLocaleString()}
+                <p style="font-size:0.78rem;color:var(--text2);">Threshold: ${v.threshold}% · Ends in: ${v.endsIn} · ${v.totalVoters} voters</p>
+                <div class="vote-bar"><span style="color:var(--green);">Yes ${yesPct}%</span><div class="bar-bg"><div class="bar-fill" style="width:${yesPct}%;background:var(--green);"></div></div></div>
+                <div class="vote-bar"><span style="color:var(--red);">No ${noPct}%</span><div class="bar-bg"><div class="bar-fill" style="width:${noPct}%;background:var(--red);"></div></div></div>
+                <div style="margin-top:8px;display:flex;gap:8px;">
+                  <button class="btn btn-sm btn-primary" onclick="castVote('${v.id}','yes')">👍 Vote Yes</button>
+                  <button class="btn btn-sm btn-outline" onclick="castVote('${v.id}','no')">👎 Vote No</button>
+                </div>
+                ${met ? '<p style="color:var(--green);font-weight:700;margin-top:6px;">✅ Threshold met — awaiting execution</p>' : '<p style="color:var(--yellow);margin-top:6px;">⚠️ Below threshold</p>'}
+              </div>`;
+            });
+            html += '</div>';
+            return html;
+        }
+
+        function renderPortfolio() {
+            const inv = Store.investor;
+            let html = `
+            <div class="card"><div class="card-header"><h3>📈 Your Portfolio</h3><span class="chip chip-green">${inv.ownershipPct}% Fund Ownership</span></div>
+            <p style="font-size:0.85rem;color:var(--text2);margin-bottom:12px;">Formula: Ownership = Individual Contribution ÷ Total Fund Value</p>
+            <table>
+              <thead><tr><th>Business</th><th>Invested</th><th>Current Value</th><th>Return</th><th>Status</th></tr></thead>
+              <tbody>`;
+            const holdings = [
+                { name: 'Mali Fresh Farms', invested: 30000, value: 38400, ret: '+28%', status: 'green' },
+                { name: 'TechSavvy Solutions', invested: 25000, value: 31000, ret: '+24%', status: 'green' },
+                { name: 'Sunrise Solar Ltd', invested: 32500, value: 41550, ret: '+28%', status: 'green' },
+            ];
+            holdings.forEach(h => {
+                html +=
+                    `<tr><td>${h.name}</td><td>KSH ${h.invested.toLocaleString()}</td><td>KSH ${h.value.toLocaleString()}</td><td style="color:var(--green);">${h.ret}</td><td><span class="status-dot ${h.status}"></span>Healthy</td></tr>`;
+            });
+            html +=
+                `<tr style="font-weight:700;"><td>Total</td><td>KSH 87,500</td><td>KSH 110,950</td><td style="color:var(--green);">+26.8%</td><td></td></tr>`;
+            html += `</tbody></table></div>
+            <div class="card">
+              <div class="card-header"><h3>🛡️ Diversification Rules</h3></div>
+              <div style="display:grid;gap:10px;font-size:0.85rem;">
+                <div style="display:flex;justify-content:space-between;"><span>Max per business (15%)</span><span style="color:var(--green);">✅ Compliant (max 12.4%)</span></div>
+                <div style="display:flex;justify-content:space-between;"><span>Max per industry (30%)</span><span style="color:var(--green);">✅ Compliant (max 22%)</span></div>
+                <div style="display:flex;justify-content:space-between;"><span>Emergency reserve (min 20%)</span><span style="color:var(--green);">✅ 24% maintained</span></div>
+              </div>
+            </div>`;
+            return html;
+              }
+      function renderSecondary() {
+            let html = `<div class="card"><div class="card-header"><h3>🔄 Secondary Share Marketplace</h3><span class="chip chip-blue">${Store.secondaryListings.length} Listings</span></div>
+            <p style="font-size:0.8rem;color:var(--text2);margin-bottom:12px;">Trade ownership units with other investors for liquidity.</p>`;
+            Store.secondaryListings.forEach(s => {
+                html += `
+              <div style="background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius);padding:14px;margin-bottom:10px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;">
+                <div><strong style="color:#fff;">${s.businessName}</strong><br><span style="font-size:0.78rem;color:var(--text2);">${s.units} units · KSH ${s.pricePerUnit.toLocaleString()}/unit · ${s.discount}</span><br><span style="font-size:0.7rem;color:var(--text3);">Seller: ${s.seller}</span></div>
+                <button class="btn btn-primary btn-sm" onclick="buySecondary('${s.id}')">Buy Units</button>
+              </div>`;
+            });
+            html += '</div>';
+            return html;
+        }
+
+        function renderDueDiligence() {
+            return `
+            <div class="card"><div class="card-header"><h3>🔍 Due Diligence Requirements</h3><span class="chip chip-blue">Mandatory</span></div>
+            <div style="display:grid;gap:8px;font-size:0.85rem;">
+              <div>✅ National ID verification</div><div>✅ Physical location confirmed</div><div>✅ Business photos uploaded</div>
+              <div>✅ Financial records reviewed</div><div>✅ References checked</div><div>✅ Guarantor verified</div>
+              <div>✅ Collateral evidence validated</div>
+            </div></div>
+            <div class="card"><div class="card-header"><h3>📊 Risk Scoring Engine</h3></div>
+            <table>
+              <thead><tr><th>Category</th><th>Weight</th><th>Score Range</th></tr></thead>
+              <tbody>
+                <tr><td>Financial Health</td><td>0–20</td><td><div class="progress-bar"><div class="fill fill-green" style="width:85%;"></div></div></td></tr>
+                <tr><td>Management Experience</td><td>0–20</td><td><div class="progress-bar"><div class="fill fill-gold" style="width:70%;"></div></div></td></tr>
+                <tr><td>Market Demand</td><td>0–20</td><td><div class="progress-bar"><div class="fill fill-green" style="width:90%;"></div></div></td></tr>
+                <tr><td>Business Stability</td><td>0–20</td><td><div class="progress-bar"><div class="fill fill-gold" style="width:65%;"></div></div></td></tr>
+                <tr><td>Collateral Strength</td><td>0–20</td><td><div class="progress-bar"><div class="fill fill-green" style="width:80%;"></div></div></td></tr>
+              </tbody>
+            </table>
+            <p style="font-size:0.8rem;color:var(--text2);margin-top:8px;"><strong>Ratings:</strong> A+ (90–100) · A (80–89) · B (70–79) · C (60–69) · D (Below 60)</p>
+            </div>`;
+        }
+
+        function renderRepayment() {
+            let html = `<div class="card"><div class="card-header"><h3>📋 Repayment Tracking</h3></div><table>
+            <thead><tr><th>Business</th><th>Capital Recovered</th><th>Profits Received</th><th>Missed</th><th>Outstanding</th><th>Status</th></tr></thead><tbody>`;
+            const reps = [
+                { name: 'Mali Fresh Farms', rec: 'KSH 120,000', profits: 'KSH 18,000', missed: 0, out: 'KSH 200,000',
+                    status: 'green' },
+                { name: 'TechSavvy Solutions', rec: 'KSH 200,000', profits: 'KSH 28,000', missed: 0, out: 'KSH 100,000',
+                    status: 'green' },
+                { name: 'Zawadi Textiles', rec: 'KSH 45,000', profits: 'KSH 3,200', missed: 1, out: 'KSH 135,000',
+                    status: 'yellow' },
+                { name: 'QuickBite Catering', rec: 'KSH 5,000', profits: 'KSH 0', missed: 3, out: 'KSH 40,000',
+                    status: 'red' },
+            ];
+            reps.forEach(r => {
+                const dot = r.status === 'green' ? 'green' : r.status === 'yellow' ? 'yellow' : 'red';
+                const label = r.status === 'green' ? 'Healthy' : r.status === 'yellow' ? 'At Risk' : 'Default';
+                html +=
+                    `<tr><td>${r.name}</td><td>${r.rec}</td><td>${r.profits}</td><td>${r.missed}</td><td>${r.out}</td><td><span class="status-dot ${dot}"></span>${label}</td></tr>`;
+            });
+            html += '</tbody></table></div>';
+            return html;
+        }
+
+        function renderRecovery() {
+            let html = `<div class="card"><div class="card-header"><h3>⚖️ Recovery Management System</h3></div>`;
+            Store.recoveryCases.forEach(rc => {
+                const stages = ['Automated Reminders', 'Negotiation', 'Guarantor Engagement',
+                    'Collateral Enforcement', 'Legal Action'
+                ];
+                html += `
+              <div style="background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius);padding:14px;margin-bottom:10px;">
+                <strong style="color:#fff;">${rc.businessName}</strong> · Owed: KSH ${rc.amountOwed.toLocaleString()} · ${rc.daysLate} days late
+                <p style="font-size:0.8rem;color:var(--yellow);">Current Stage ${rc.stage}: ${stages[rc.stage-1]}</p>
+                <div style="display:flex;gap:6px;margin-top:6px;">
+                  ${stages.map((s,i) => `<span class="tag" style="${i+1===rc.stage?'background:var(--yellow);color:#000;':''}">Stage ${i+1}: ${s}</span>`).join('')}
+                </div>
+              </div>`;
+            });
+            html += '</div>';
+            return html;
+        }
+
+        function renderBusinessDash() {
+            return `
+            <div class="stats-grid">
+              <div class="stat-card gold"><div class="value">KSH 320,000</div><div class="label">Funding Received</div></div>
+              <div class="stat-card"><div class="value">KSH 500,000</div><div class="label">Funding Goal</div></div>
+              <div class="stat-card green"><div class="value">64%</div><div class="label">Funded</div></div>
+            </div>
+            <div class="card"><div class="card-header"><h3>📊 Application Status</h3><span class="chip chip-green">Approved</span></div>
+            <p style="font-size:0.85rem;color:var(--text2);">Your business application has been approved. Maintain compliance by submitting periodic reports.</p></div>
+            <div class="card"><div class="card-header"><h3>📅 Repayment Schedule</h3></div>
+            <table><thead><tr><th>Due Date</th><th>Amount</th><th>Status</th></tr></thead>
+            <tbody>
+              <tr><td>2026-07-15</td><td>KSH 45,000</td><td><span class="status-dot green"></span>Paid</td></tr>
+              <tr><td>2026-08-15</td><td>KSH 45,000</td><td><span class="status-dot green"></span>Upcoming</td></tr>
+              <tr><td>2026-09-15</td><td>KSH 45,000</td><td><span class="status-dot yellow"></span>Pending</td></tr>
+            </tbody></table></div>`;
+        }
+
+        function renderApply() {
+            return `
+            <div class="card"><div class="card-header"><h3>📝 Submit Funding Application</h3></div>
+            <form onsubmit="submitApplication(event)" style="display:grid;gap:12px;max-width:600px;">
+              <label>Business Name</label><input type="text" required placeholder="Enter business name" id="appName">
+              <label>Industry</label><select required id="appIndustry"><option value="">Select...</option><option>Agriculture</option><option>Technology</option><option>Manufacturing</option><option>Energy</option><option>Food & Beverage</option></select>
+              <label>Funding Required (KSH)</label><input type="number" required placeholder="Amount" id="appAmount">
+              <label>Purpose</label><textarea rows="2" required placeholder="Describe the funding purpose" id="appPurpose"></textarea>
+              <label>Collateral Offered</label><input type="text" required placeholder="e.g., Land title, Equipment" id="appCollateral">
+              <label>Repayment Duration (months)</label><input type="number" required placeholder="e.g., 12" id="appDuration">
+              <button type="submit" class="btn btn-primary">Submit Application</button>
+            </form></div>`;
+        }
+
+        // ==================== MODALS ====================
+        function showModal(type) {
+            const container = document.getElementById('modalContainer');
+            let html = '';
+            if (type === 'deposit') {
+                html = `
+              <div class="modal-overlay" onclick="closeModal(event)">
+                <div class="modal" onclick="event.stopPropagation()">
+                  <h3>💳 Deposit Funds</h3>
+                  <label>Amount (KSH)</label><input type="number" id="modalAmount" placeholder="Enter amount" min="100">
+                  <label>Channel</label><select id="modalChannel"><option>M-Pesa</option><option>Bank Transfer</option><option>Card (Coming Soon)</option></select>
+                  <div class="btn-row"><button class="btn btn-outline" onclick="closeModal()">Cancel</button><button class="btn btn-primary" onclick="processDeposit()">Deposit</button></div>
+                </div></div>`;
+            } else if (type === 'withdraw') {
+                html = `
+              <div class="modal-overlay" onclick="closeModal(event)">
+                <div class="modal" onclick="event.stopPropagation()">
+                  <h3>💸 Withdraw Funds</h3>
+                  <label>Amount (KSH)</label><input type="number" id="modalAmount" placeholder="Enter amount" min="100" max="${Store.investor.balance}">
+                  <p style="font-size:0.75rem;color:var(--text2);">Available: KSH ${Store.investor.balance.toLocaleString()}</p>
+                  <div class="btn-row"><button class="btn btn-outline" onclick="closeModal()">Cancel</button><button class="btn btn-primary" onclick="processWithdraw()">Withdraw</button></div>
+                </div></div>`;
+            } else if (type === 'transfer') {
+                html = `
+              <div class="modal-overlay" onclick="closeModal(event)">
+                <div class="modal" onclick="event.stopPropagation()">
+                  <h3>🔄 Transfer Funds</h3>
+                  <label>Recipient</label><input type="text" placeholder="Wallet ID or phone">
+                  <label>Amount (KSH)</label><input type="number" id="modalAmount" placeholder="Enter amount" min="100">
+                  <div class="btn-row"><button class="btn btn-outline" onclick="closeModal()">Cancel</button><button class="btn btn-primary" onclick="processTransfer()">Send</button></div>
+                </div></div>`;
+            }
+            container.innerHTML = html;
+        }
+
+        function closeModal(event) {
+            if (event && event.target !== event.currentTarget) return;
+            document.getElementById('modalContainer').innerHTML = '';
+        }
+
+        function processDeposit() {
+            const amt = parseInt(document.getElementById('modalAmount')?.value || 0);
+            if (amt > 0) {
+                Store.investor.balance += amt;
+                alert(`✅ Successfully deposited KSH ${amt.toLocaleString()}. New balance: KSH ${Store.investor.balance.toLocaleString()}`);
+                closeModal();
+                renderPage(currentPage);
+            }
+        }
+
+        function processWithdraw() {
+            const amt = parseInt(document.getElementById('modalAmount')?.value || 0);
+            if (amt > 0 && amt <= Store.investor.balance) {
+                Store.investor.balance -= amt;
+                alert(`✅ Withdrawn KSH ${amt.toLocaleString()}. Remaining: KSH ${Store.investor.balance.toLocaleString()}`);
+                closeModal();
+                renderPage(currentPage);
+            } else {
+                alert('Invalid amount.');
+            }
+        }
+
+        function processTransfer() {
+            const amt = parseInt(document.getElementById('modalAmount')?.value || 0);
+            if (amt > 0 && amt <= Store.investor.balance) {
+                Store.investor.balance -= amt;
+                alert(`✅ Transferred KSH ${amt.toLocaleString()}.`);
+                closeModal();
+                renderPage(currentPage);
+            } else {
+                alert('Invalid amount.');
+            }
+        }
+
+        function investIn(bizId) {
+            const biz = Store.businesses.find(b => b.id === bizId);
+            if (!biz) return;
+            const amt = prompt(`Enter amount to invest in ${biz.name} (min KSH 1,000):`, '5000');
+            const num = parseInt(amt);
+            if (num >= 1000 && num <= Store.investor.balance) {
+                Store.investor.balance -= num;
+                Store.investor.totalInvested += num;
+                Store.investor.portfolioValue += num;
+                biz.raised += num;
+                alert(
+                    `✅ Invested KSH ${num.toLocaleString()} in ${biz.name}. New balance: KSH ${Store.investor.balance.toLocaleString()}`
+                    );
+                renderPage(currentPage);
+            } else if (num > Store.investor.balance) {
+                alert('Insufficient balance.');
+            } else {
+                alert('Minimum investment is KSH 1,000.');
+            }
+        }
+
+        function castVote(voteId, choice) {
+            const vote = Store.votes.find(v => v.id === voteId);
+            if (!vote) return;
+            if (choice === 'yes') vote.yesVotes += 3;
+            else vote.noVotes += 3;
+            vote.totalVoters += 1;
+            Store.investor.votesCast++;
+            Store.investor.pendingVotes = Math.max(0, Store.investor.pendingVotes - 1);
+            // Remove if all voted
+            if (Store.investor.pendingVotes <= 0) {
+                Store.votes = [];
+            }
+            alert(`✅ Vote cast: ${choice.toUpperCase()} for ${vote.businessName}`);
+            updateVoteBadge();
+            renderPage(currentPage);
+        }
+
+        function buySecondary(listingId) {
+            const listing = Store.secondaryListings.find(l => l.id === listingId);
+            if (!listing) return;
+            const units = parseInt(prompt(`How many units of ${listing.businessName}? (Price: KSH ${listing.pricePerUnit.toLocaleString()}/unit)`,
+                '5'));
+            if (units > 0 && units <= listing.units) {
+                const total = units * listing.pricePerUnit;
+                if (total <= Store.investor.balance) {
+                    Store.investor.balance -= total;
+                    Store.investor.portfolioValue += total;
+                    listing.units -= units;
+                    if (listing.units <= 0) Store.secondaryListings = Store.secondaryListings.filter(l => l.id !==
+                        listingId);
+                    alert(`✅ Purchased ${units} units for KSH ${total.toLocaleString()}`);
+                    renderPage(currentPage);
+                } else { alert('Insufficient balance.'); }
+            }
+        }
+
+        function submitApplication(e) {
+            e.preventDefault();
+            const name = document.getElementById('appName')?.value;
+            const amount = parseInt(document.getElementById('appAmount')?.value || 0);
+            if (name && amount > 0) {
+                const newBiz = {
+                    id: 'B' + String(Store.businesses.length + 1).padStart(3, '0'),
+                    name,
+                    industry: document.getElementById('appIndustry')?.value || 'General',
+                    fundingGoal: amount,
+                    raised: 0,
+                    riskScore: Math.floor(Math.random() * 30) + 50,
+                    rating: 'Pending',
+                    expectedReturn: 'TBD',
+                    duration: (document.getElementById('appDuration')?.value || '12') + ' months',
+                    collateral: document.getElementById('appCollateral')?.value || 'N/A',
+                    status: 'funding',
+                    repaymentStatus: 'yellow',
+                    description: document.getElementById('appPurpose')?.value || '',
+                };
+                Store.businesses.push(newBiz);
+                alert(`✅ Application submitted for ${name}. Our analysts will review it.`);
+                renderPage('marketplace');
+                navigate('marketplace');
+            }
+        }
+
+        function attachEventListeners(page) {
+            if (page === 'dashboard') {
+                setTimeout(drawGrowthChart, 150);
+            }
+        }
+
+        function drawGrowthChart() {
+            const canvas = document.getElementById('growthChart');
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+            const w = canvas.parentElement.clientWidth - 40;
+            canvas.width = w;
+            canvas.height = 200;
+            const data = [100, 105, 108, 112, 118, 122, 128, 135, 140, 148, 155, 160, 168, 175, 182, 190, 198, 205, 215,
+                225, 235, 245, 258, 270, 285, 300, 310, 325, 340, 355, 370, 390, 410, 430, 450, 470, 490, 510, 530, 555,
+                580, 610, 640, 670, 700, 730, 760, 790, 825, 860, 900, 940, 980, 1020, 1060, 1100, 110950
+            ];
+            const maxVal = Math.max(...data);
+            const padding = 30;
+            const chartW = w - padding * 2;
+            const chartH = canvas.height - padding * 2;
+            ctx.clearRect(0, 0, w, canvas.height);
+            // Grid
+            ctx.strokeStyle = '#1f2533';
+            ctx.lineWidth = 0.5;
+            for (let i = 0; i <= 4; i++) {
+                const y = padding + (chartH / 4) * i;
+                ctx.beginPath();
+                ctx.moveTo(padding, y);
+                ctx.lineTo(w - padding, y);
+                ctx.stroke();
+                ctx.fillStyle = '#6b7385';
+                ctx.font = '10px system-ui';
+                ctx.fillText('KSH ' + Math.round(maxVal * (1 - i / 4)).toLocaleString(), 2, y + 3);
+            }
+            // Line
+            ctx.strokeStyle = '#d4a843';
+            ctx.lineWidth = 2.5;
+            ctx.beginPath();
+            data.forEach((val, i) => {
+                const x = padding + (chartW / (data.length - 1)) * i;
+                const y = padding + chartH - (val / maxVal) * chartH;
+                if (i === 0) ctx.moveTo(x, y);
+                else ctx.lineTo(x, y);
+            });
+            ctx.stroke();
+            // Gradient fill
+            const grad = ctx.createLinearGradient(0, padding, 0, padding + chartH);
+            grad.addColorStop(0, 'rgba(212,168,67,0.25)');
+            grad.addColorStop(1, 'rgba(212,168,67,0)');
+            ctx.fillStyle = grad;
+            ctx.lineTo(padding + chartW, padding + chartH);
+            ctx.lineTo(padding, padding + chartH);
+            ctx.closePath();
+            ctx.fill();
+            // End dot
+            const lastX = padding + chartW;
+            const lastY = padding + chartH - (data[data.length - 1] / maxVal) * chartH;
+            ctx.fillStyle = '#e8c468';
+            ctx.beginPath();
+            ctx.arc(lastX, lastY, 6, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.fillStyle = '#fff';
+            ctx.font = 'bold 11px system-ui';
+            ctx.fillText('KSH 110,950', lastX - 40, lastY - 12);
+        }
+          // ==================== INIT ====================
+        function init() {
+            renderPage('dashboard');
+            updateVoteBadge();
+            // Handle window resize for chart
+            window.addEventListener('resize', () => {
+                if (currentPage === 'dashboard') setTimeout(drawGrowthChart, 200);
+            });
+            // Close sidebar on outside click (mobile)
+            document.addEventListener('click', (e) => {
+                const sidebar = document.getElementById('sidebar');
+                const toggle = document.querySelector('.menu-toggle');
+                if (window.innerWidth <= 768 && sidebar.classList.contains('open') &&
+                    !sidebar.contains(e.target) && e.target !== toggle && !toggle.contains(e.target)) {
+                    sidebar.classList.remove('open');
+                }
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', init);
+        console.log('🚀 Alleon Capital Platform Ready');
+        console.log('Invest Together. Build Together. Prosper Together.');
+        console.log('All modules loaded: Wallet | Marketplace | Voting | Portfolio | Secondary Market | Due Diligence | Repayment | Recovery | Business Dashboard | Funding Application');
+    </script>
+</body>
+</html>
